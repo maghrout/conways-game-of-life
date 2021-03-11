@@ -6,15 +6,17 @@ enum CellStatuses {
 export class Cell {
     getNextGeneration(currentStatus: string, numberOfAliveNeighbours: number) {
         if(currentStatus === CellStatuses.Alive) {
-            if (numberOfAliveNeighbours === 2 || numberOfAliveNeighbours === 3) {
-                return CellStatuses.Alive;
-            }
-            return CellStatuses.Dead;
-        } else {
-            if(numberOfAliveNeighbours === 3) {
-                return CellStatuses.Alive;
-            }
-            return CellStatuses.Dead;
+            return Cell.handleAliveCell(numberOfAliveNeighbours);
         }
+
+        return Cell.handleDeadCell(numberOfAliveNeighbours);
+    }
+
+    private static handleDeadCell(numberOfAliveNeighbours: number) {
+        return numberOfAliveNeighbours === 3 ? CellStatuses.Alive : CellStatuses.Dead;
+    }
+
+    private static handleAliveCell(numberOfAliveNeighbours: number) {
+        return numberOfAliveNeighbours === 2 || numberOfAliveNeighbours === 3 ? CellStatuses.Alive : CellStatuses.Dead;
     }
 }
