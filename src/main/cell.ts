@@ -4,10 +4,17 @@ enum CellStatuses {
 }
 
 export class Cell {
-    getNextGeneration(currentStatus: string, numberOfNeighbours: number) {
-        if(numberOfNeighbours === 2 || numberOfNeighbours === 3){
-            return CellStatuses.Alive;
+    getNextGeneration(currentStatus: string, numberOfAliveNeighbours: number) {
+        if(currentStatus === CellStatuses.Alive) {
+            if (numberOfAliveNeighbours === 2 || numberOfAliveNeighbours === 3) {
+                return CellStatuses.Alive;
+            }
+            return CellStatuses.Dead;
+        } else {
+            if(numberOfAliveNeighbours === 3) {
+                return CellStatuses.Alive;
+            }
+            return CellStatuses.Dead;
         }
-        return CellStatuses.Dead;
     }
 }
