@@ -1,9 +1,23 @@
-enum CellStatuses {
+export enum CellStatuses {
     Alive = 'alive',
     Dead = 'dead'
 }
 
+interface Position{
+    x:number;
+    y:number;
+}
+
 export class Cell {
+
+    currentStatus:CellStatuses
+    position:Position;
+
+    constructor(status:CellStatuses,x:number,y:number) {
+        this.currentStatus=status;
+        this.position= {x,y}
+    }
+
     getNextGeneration(currentStatus: string, numberOfAliveNeighbours: number) {
         if(currentStatus === CellStatuses.Alive) {
             return Cell.handleAliveCell(numberOfAliveNeighbours);
